@@ -1,0 +1,81 @@
+import { styled } from '@mui/material/styles';
+import { Box, Chip, Link, ListItemText, Typography, Paper } from '@mui/material';
+
+export const DialogPaperStyled = styled(Paper)(({ theme }) => ({
+  padding: '25px 0',
+  [theme.breakpoints.down('tablet')]: {
+    padding: '35px 0',
+    maxWidth: 280,
+    minWidth: 280,
+    borderRadius: 20,
+  },
+  [theme.breakpoints.up('tablet')]: {
+    minWidth: 608,
+    borderRadius: 40
+  },
+}));
+
+export const ImageBoxStyled = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  flexBasis: '260px',
+}));
+
+export const CategoryChipStyled = styled(Chip)(({ theme }) => ({
+  position: 'absolute',
+  left: 0,
+  top: '20px',
+  minWidth: '126px',
+  justifyContent: 'left',
+  borderTopLeftRadius: 0,
+  borderBottomLeftRadius: 0,
+  backgroundColor: '#CCE4FB',
+  color: '#111111',
+  textTransform:'capitalize',
+}));
+
+
+export const PetImageStyled = styled('img')(({ theme }) => ({
+  maxWidth: '260px',
+  borderBottomLeftRadius: '35px',
+  borderBottomRightRadius: '35px',
+  [theme.breakpoints.down('tablet')]: {
+    maxWidth: '230px',
+  },
+}));
+
+
+export const InfoBoxStyled = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up('tablet')]: {
+    marginLeft: '24px',
+    width: '260px',
+  },
+}));
+
+
+export const InfoTitleStyled = styled(Typography)(({ theme }) => ({
+  fontSize: '20px',
+  fontWeight: 700,
+  [theme.breakpoints.up('tablet')]: {
+    fontSize: '28px',
+  },
+  [theme.breakpoints.down('tablet')]: {
+    marginTop: '10px'
+  }
+}));
+
+export const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
+  fontSize: '16px',
+  margin: '3px 0 0 0'
+}));
+
+
+export const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: '#FFC107',
+  textDecorationColor: '#FFC107',
+  transition: 'color 250ms ease-in',
+  '&:hover': {
+    color: '#54ADFF',
+    textDecorationColor: '#54ADFF',
+  }
+}));
