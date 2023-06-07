@@ -19,7 +19,7 @@ import {
   IconCross,
 } from './UserData.styled';
 
-const EditPhoto = () => {
+const UserEditPhoto = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [isEditingPhoto, setIsEditingPhoto] = useState(false);
 
@@ -102,4 +102,4 @@ const EditPhoto = () => {
   );
 };
 
-export default EditPhoto;
+export default UserEditPhoto;

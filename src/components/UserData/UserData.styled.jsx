@@ -167,12 +167,12 @@ export const Input = styled(Field)`
   }
 `;
 
-export const DivLogOut = styled.div`
+export const LogOutWrapper = styled.div`
   display: flex;
-  margin-top: 25px;
+  margin-top: 20px;
 
   @media screen and (min-width: 768px) {
-    margin-top: 15px;
+    margin-top: 14px;
   }
 `;
 
