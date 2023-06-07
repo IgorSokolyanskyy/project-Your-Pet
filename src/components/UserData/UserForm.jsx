@@ -9,7 +9,7 @@ import {
   Label,
   Input,
   IconEdit,
-  DivIconCheck,
+  WrapperIconCheck,
   IconCheck,
   EmailStyled,
 } from './UserData.styled';
@@ -24,6 +24,8 @@ const validationSchema = yup.object().shape({
 const UserForm = ({ handleFormSubmit }) => {
   const { name, email, phone, birthday, city } = useSelector(selectUser);
 
+  const [activeInput, setActiveInput] = useState(null);
+
   const initialValues = {
     Name: name || 'Your name',
     Phone: phone || '+38 000 000 00 00',
@@ -31,65 +33,54 @@ const UserForm = ({ handleFormSubmit }) => {
     City: city || 'Dnipro',
   };
 
-  const [activeInput, setActiveInput] = useState(null);
-  const [formValues, setFormValues] = useState(initialValues);
-
-  const handleFieldChange = (fieldName, fieldValue) => {
-    setActiveInput(fieldName);
-    setFormValues(prevValues => ({
-      ...prevValues,
-      [fieldName]: fieldValue,
-    }));
-  };
-
-  const renderField = name => {
-    const isActive = activeInput === name;
-    const isEditing = isActive && activeInput !== null;
-
-    return (
-      <Label key={name}>
-        {name}:
-        <Field name={name}>
-          {({ field }) => (
-            <Input
-              type="text"
-              {...field}
-              readOnly={!isActive}
-              className={isEditing ? 'editing' : ''}
-              onChange={e => {
-                field.onChange(e);
-                handleFieldChange(name, e.target.value);
-              }}
-            />
-          )}
-        </Field>
-        {isActive ? (
-          <DivIconCheck>
-            <IconCheck
-              onClick={() => {
-                handleFormSubmit(formValues);
-                setActiveInput(null);
-              }}
-            />
-          </DivIconCheck>
-        ) : (
-          <IconEdit onClick={() => handleFieldChange(name)} />
-        )}
-      </Label>
-    );
-  };
-
   return (
     <Formik
-      initialValues={formValues}
+      initialValues={initialValues}
       onSubmit={handleFormSubmit}
       validationSchema={validationSchema}
     >
-      <Form>
-        <EmailStyled>{email}</EmailStyled>
+      {({ values, setFieldValue }) => (
+        <Form>
+          <EmailStyled>{email}</EmailStyled>
 
-        {Object.keys(formValues).map(field => renderField(field))}
-      </Form>
+          {Object.keys(initialValues).map(field => {
+            const isActive = activeInput === field;
+            const isEditing = isActive && activeInput !== null;
+
+            return (
+              <Label key={field}>
+                {field}:
+                <Field name={field}>
+                  {({ field }) => (
+                    <Input
+                      type="text"
+                      {...field}
+                      readOnly={!isActive}
+                      className={isEditing ? 'editing' : ''}
+                      onChange={e => {
+                        field.onChange(e);
+                        setFieldValue(field.name, e.target.value);
+                      }}
+                    />
+                  )}
+                </Field>
+                {isActive ? (
+                  <WrapperIconCheck>
+                    <IconCheck
+                      onClick={() => {
+                        handleFormSubmit(values);
+                        setActiveInput(null);
+                      }}
+                    />
+                  </WrapperIconCheck>
+                ) : (
+                  <IconEdit onClick={() => setActiveInput(field)} />
+                )}
+              </Label>
+            );
+          })}
+        </Form>
+      )}
     </Formik>
   );
 };

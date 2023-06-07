@@ -221,7 +221,7 @@ export const IconEdit = styled(CiEdit)`
   }
 `;
 
-export const DivIconCheck = styled.div`
+export const WrapperIconCheck = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
